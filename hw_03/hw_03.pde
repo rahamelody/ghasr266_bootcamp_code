@@ -1,5 +1,6 @@
 PImage myImage;
 PImage myImage2;
+boolean button = false;
 
 void setup () {
   
@@ -13,14 +14,25 @@ void draw () {
   imageMode (CENTER);
   image(myImage, width/2, height/2);
   
+  
    //press on GREEN region to see bigger map of Iran
-  color green = color (148, 209, 176);
+//   color green = color (148,209,176);
+   loadPixels();
+   float r = red(myImage.pixels[166]);
+   float g = green(myImage.pixels[208]);
+   float b = blue(myImage.pixels[175]);
+   color iran = color (r, g, b);
  
-  if (mousePressed && (mouseButton == pixels[green])) {
-     
+  if (mousePressed && (mouseButton == pixels[iran])) {
+    button = true;
+  } else {
+    button = false;
+    noLoop();
+  }
+  if (button == true) {
     image(myImage2, width/2, height/2);
   } else {
-    noLoop();
+    image(myImage, width/2, height/2);
   }
  
 //  reference: https://processing.org/reference/mouseButton.html
